@@ -67,20 +67,40 @@ let mobilb = document.querySelector(".mobilB");
 let mobilc = document.querySelector(".mobilC");
 let mobilS = document.querySelector(".all-nav");
 
+let sidebarOpen = false;
 
+function closeSidebar() {
+    mobilS.style.display = "none";
+    mobil.style.zIndex = "1";
+
+    mobil.style.transform = "rotate(0deg)";
+    mobila.style.transform = "rotate(0deg)";
+    mobila.style.marginTop = "50px";
+    mobilb.style.display = "block";
+    mobilc.style.transform = "rotate(0deg)";
+    sidebarOpen = false;
+}
 
 mobil.addEventListener("click", function () {
+    if (!sidebarOpen) {
+        mobilS.style.display = "block";
+        mobil.style.zIndex = "999";
 
-    mobilS.style.display = "block";
-    mobil.style.zIndex = "999";;
+        mobil.style.transform = "rotate(35deg)";
+        mobila.style.transform = "rotate(10deg)";
+        mobila.style.marginTop = "100px";
+        mobilb.style.display = "none";
+        mobilc.style.transform = "rotate(100deg)";
+        sidebarOpen = true;
+    } else {
+        closeSidebar();
+    }
+});
 
-    mobil.style.transform = "rotate(35deg)";
-    mobila.style.transform = "rotate(10deg)";
-    mobila.style.marginTop = "100px"
-    mobilb.style.display = "none";
-    mobilc.style.transform = "rotate(100deg)"
-
-
-
-    
+// ✅ যখন কোন a tag-এ ক্লিক হবে, sidebar hide হবে
+let navLinks = document.querySelectorAll(".all-nav a");
+navLinks.forEach(function (link) {
+    link.addEventListener("click", function () {
+        closeSidebar();
+    });
 });
